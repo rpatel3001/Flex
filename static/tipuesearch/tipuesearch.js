@@ -60,7 +60,7 @@ http://www.tipue.com/search
                
                if (getURLP('q'))
                {
-                    $('#tipue_search_input').val(getURLP('q'));
+                    $('#searchbox').val(getURLP('q'));
                     getTipueSearch(0, true);
                }               
                
@@ -84,7 +84,7 @@ http://www.tipue.com/search
                     var c = 0;
                     var found = [];
                     
-                    var d_o = $('#tipue_search_input').val();
+                    var d_o = $('#searchbox').val();
                     d_o = d_o.replace(/\+/g, ' ').replace(/\s\s+/g, ' ');
  
                     d_o = $.trim(d_o);
@@ -287,7 +287,7 @@ http://www.tipue.com/search
                                    }                              
                               }
                          }                         
-                         
+                         out += '<div id="tipue_search_results_header"><h2 id="tipue_search_results_title">Search Results</h2>';
                          if (c != 0)
                          {
                               if (set.showTitleCount && tipuesearch_t_c == 0)
@@ -354,7 +354,7 @@ http://www.tipue.com/search
                               {
                                    out += '<div id="tipue_search_replace">' + tipuesearch_string_2 + ' ' + d + '. ' + tipuesearch_string_3 + ' <a id="tipue_search_replaced">' + d_r + '</a></div>';
                               }
-                              
+
                               found.sort(function(a, b) { return b.score - a.score } );
                               
                               var l_o = 0;
@@ -363,12 +363,14 @@ http://www.tipue.com/search
                               {
                                    out += '<div id="tipue_search_image_modal"><div class="tipue_search_image_close">&#10005;</div><div class="tipue_search_image_block"><a id="tipue_search_zoom_url"><img id="tipue_search_zoom_img"></a><div id="tipue_search_zoom_text"></div></div></div>';    
                               }
-                              
+
+                              out += '</div>';
+
                               for (var i = 0; i < found.length; i++)
                               {
                                    if (l_o >= start && l_o < set.show + start)
                                    {
-                                        out += '<div class="tipue_search_result">';
+                                        out += '<article class="tipue_search_result">';
                                                                            
                                         out += '<div class="tipue_search_content_title"><a href="' + found[i].url + '"' + tipue_search_w + '>' +  found[i].title + '</a></div>';
  
@@ -469,7 +471,7 @@ http://www.tipue.com/search
                                              out += '<div class="tipue_search_note">' + found[i].note + '</div>';    
                                         }                                       
                                         
-                                        out += '</div>';
+                                        out += '</article>';
                                    }
                                    l_o++;     
                               }                              
@@ -540,7 +542,7 @@ http://www.tipue.com/search
                          }
                          else
                          {
-                              out += '<div id="tipue_search_error">' + tipuesearch_string_8 + '</div>'; 
+                              out += '</div><article id="tipue_search_error">' + tipuesearch_string_8 + '</article>'; 
                          }
                     }
                     else
@@ -571,7 +573,7 @@ http://www.tipue.com/search
                     
                     $('.tipue_search_related_btn').click(function()
                     {
-                         $('#tipue_search_input').val($(this).attr('id'));
+                         $('#searchbox').val($(this).attr('id'));
                          getTipueSearch(0, true);
                     });
                     
