@@ -123,6 +123,8 @@ http://www.tipue.com/search
                     {
                          d = d.substring(1, d.length - 1);
                     }
+
+                    out += '<div id="tipue_search_results_header"><h2 id="tipue_search_results_title">Search Results</h2>';
                
                     if (d.length >= set.minimumLength)
                     {
@@ -287,7 +289,6 @@ http://www.tipue.com/search
                                    }                              
                               }
                          }                         
-                         out += '<div id="tipue_search_results_header"><h2 id="tipue_search_results_title">Search Results</h2>';
                          if (c != 0)
                          {
                               if (set.showTitleCount && tipuesearch_t_c == 0)
@@ -549,17 +550,17 @@ http://www.tipue.com/search
                     {
                          if (show_stop)
                          {
-                              out += '<div id="tipue_search_error">' + tipuesearch_string_8 + ' ' + tipuesearch_string_9 + '</div>';     
+                              out += '</div><article id="tipue_search_error">' + tipuesearch_string_8 + ' ' + tipuesearch_string_9 + '</article>';     
                          }
                          else
                          {
                               if (set.minimumLength == 1)
                               {
-                                   out += '<div id="tipue_search_error">' + tipuesearch_string_11 + '</div>';
+                                   out += '</div><article id="tipue_search_error">' + tipuesearch_string_11 + '</article>';
                               }
                               else
                               {
-                                   out += '<div id="tipue_search_error">' + tipuesearch_string_12 + ' ' + set.minimumLength + ' ' + tipuesearch_string_13 + '</div>';
+                                   out += '</div><article id="tipue_search_error">' + tipuesearch_string_12 + ' ' + set.minimumLength + ' ' + tipuesearch_string_13 + '</article>';
                               }
                          }
                     }                
