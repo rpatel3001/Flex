@@ -105,6 +105,10 @@
 
       {% if SITESUBTITLE %}<p>{{ SITESUBTITLE }}</p>{% endif %}
 
+      <form id="searchform" action="/blog/search.html" onsubmit="return (this.elements['q'].value.length > 0)">
+          <input id="searchbox" type="text" name="q" size="12" placeholder="Search">
+      </form>
+
       {% if pages or LINKS %}
       <nav>
         <ul class="list">
@@ -172,10 +176,6 @@
       {% if FEED_ALL_RSS %}
       <a href="{{ FEED_DOMAIN }}/{{ FEED_ALL_RSS }}">{{ _('RSS') }}</a>
       {% endif %}
-
-      <form id="searchform" action="/blog/search.html" onsubmit="return (this.elements['q'].value.length > 0)">
-          <input id="searchbox" type="text" name="q" size="12" placeholder="Search">
-      </form>
 
     </nav>
 
