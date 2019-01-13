@@ -107,6 +107,9 @@
 
       <form id="searchform" action="/blog/search.html" onsubmit="return (this.elements['q'].value.length > 0)">
           <input id="searchbox" type="text" name="q" size="12" placeholder="Search">
+          <button id="searchbutton" type="submit">
+              <i class="fas fa-search"></i>
+          </button>
       </form>
 
       {% if pages or LINKS %}

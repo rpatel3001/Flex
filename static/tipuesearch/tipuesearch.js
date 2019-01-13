@@ -1,4 +1,3 @@
-
 /*
 Tipue Search 7.0
 Copyright (c) 2018 Tipue
@@ -28,7 +27,7 @@ http://www.tipue.com/search
           'showRelated'            : true,
           'showTime'               : true,
           'showTitleCount'         : true,
-          'showURL'                : true,
+          'showURL'                : false,
           'wholeWords'             : true
           }, options);
           
@@ -184,11 +183,11 @@ http://www.tipue.com/search
                                              var m_c = tipuesearch.pages[i].text.match(pat).length;
                                              score += (20 * m_c);
                                         }
-                                        if (tipuesearch.pages[i].tags)
+                                        if (tipuesearch.pages[i].category)
                                         {
-                                             if (tipuesearch.pages[i].tags.search(pat) != -1)
+                                             if (tipuesearch.pages[i].category.search(pat) != -1)
                                              {
-                                                  var m_c = tipuesearch.pages[i].tags.match(pat).length;
+                                                  var m_c = tipuesearch.pages[i].category.match(pat).length;
                                                   score += (10 * m_c);
                                              }
                                         }
@@ -211,7 +210,7 @@ http://www.tipue.com/search
                                         if (d_w[f].match('^-'))
                                         {
                                              pat = new RegExp(d_w[f].substring(1), 'i');
-                                             if (tipuesearch.pages[i].title.search(pat) != -1 || tipuesearch.pages[i].text.search(pat) != -1 || tipuesearch.pages[i].tags.search(pat) != -1)
+                                             if (tipuesearch.pages[i].title.search(pat) != -1 || tipuesearch.pages[i].text.search(pat) != -1 || tipuesearch.pages[i].category.search(pat) != -1)
                                              {
                                                   score = 0;     
                                              }    
@@ -225,7 +224,14 @@ http://www.tipue.com/search
                                              "score": score,
                                              "title": tipuesearch.pages[i].title,
                                              "desc": s_t,
+                                             "author": tipuesearch.pages[i].author,
+                                             "siteurl": tipuesearch.pages[i].siteurl,
                                              "img": tipuesearch.pages[i].img, 
+                                             "authors": tipuesearch.pages[i].authors,
+                                             "tags": tipuesearch.pages[i].tags,
+                                             "date": tipuesearch.pages[i].date,
+                                             "readmins": tipuesearch.pages[i].readmins,
+                                             "category": tipuesearch.pages[i].category,
                                              "url": tipuesearch.pages[i].url,
                                              "note": tipuesearch.pages[i].note
                                         });
@@ -250,11 +256,11 @@ http://www.tipue.com/search
                                         var m_c = tipuesearch.pages[i].text.match(pat).length;
                                         score += (20 * m_c);
                                    }
-                                   if (tipuesearch.pages[i].tags)
+                                   if (tipuesearch.pages[i].category)
                                    {
-                                        if (tipuesearch.pages[i].tags.search(pat) != -1)
+                                        if (tipuesearch.pages[i].category.search(pat) != -1)
                                         {
-                                             var m_c = tipuesearch.pages[i].tags.match(pat).length;
+                                             var m_c = tipuesearch.pages[i].category.match(pat).length;
                                              score += (10 * m_c);
                                         }
                                    }
@@ -281,6 +287,13 @@ http://www.tipue.com/search
                                              "score": score,
                                              "title": tipuesearch.pages[i].title,
                                              "desc": s_t,
+                                             "author": tipuesearch.pages[i].author,
+                                             "authors": tipuesearch.pages[i].authors,
+                                             "siteurl": tipuesearch.pages[i].siteurl,
+                                             "tags": tipuesearch.pages[i].tags,
+                                             "date": tipuesearch.pages[i].date,
+                                             "category": tipuesearch.pages[i].category,
+                                             "readmins": tipuesearch.pages[i].readmins,
                                              "img": tipuesearch.pages[i].img,
                                              "url": tipuesearch.pages[i].url,
                                              "note": tipuesearch.pages[i].note
@@ -372,7 +385,7 @@ http://www.tipue.com/search
                                    if (l_o >= start && l_o < set.show + start)
                                    {
                                         out += '<article class="tipue_search_result">';
-                                                                           
+                                        out += '<header>';                                   
                                         out += '<div class="tipue_search_content_title"><a href="' + found[i].url + '"' + tipue_search_w + '>' +  found[i].title + '</a></div>';
  
                                         if (set.debug)
@@ -388,8 +401,36 @@ http://www.tipue.com/search
                                                   s_u = s_u.slice(7);
                                              }                                             
                                              out += '<div class="tipue_search_content_url"><a href="' + found[i].url + '"' + tipue_search_w + '>' + s_u + '</a></div>';
+                                        } else {
+                                            out += '<p>Posted ';
+                                            for (var j = 0; j < found[i].authors.length; j++) {
+                                                if (j == 0) {
+                                                    out += 'by  ';
+                                                }
+                                                out += '<a href="' + found[i].siteurl + '/author/' + found[i].authors[j].replace(' ', '-').toLowerCase() + '.html">' + found[i].authors[j] + '</a>';
+                                                if (j != found[i].authors.length - 1) {
+                                                    out += ', ';
+                                                }
+                                            }
+                                            out += ' on ' + found[i].date;
+                                            out += ' in <a href="' + found[i].siteurl + '/category/' + found[i].category.replace(' ', '-').toLowerCase() + '.html">' + found[i].category + '</a>';
+                                            for (var j = 0; j < found[i].tags.length; j++) {
+                                                if (j == 0) {
+                                                    out += ' &#8226; Tagged with ';
+                                                }
+                                                out += '<a href="' + found[i].siteurl + '/tag/' + found[i].tags[j].replace(' ', '-').toLowerCase() + '.html">' + found[i].tags[j] + '</a>';
+                                                if (j != found[i].tags.length - 1) {
+                                                    out += ', ';
+                                                }
+                                            }
+                                            if (found[i].readmins) {
+                                                out += ' &#8226; ' + found[i].readmins + ' min read';
+                                            }
+                                            out += '</p>';
                                         }
-                                        
+
+                                        out += '</header><div>';
+
                                         if (found[i].img)
                                         {
                                              if (set.imageZoom)
@@ -464,14 +505,24 @@ http://www.tipue.com/search
                                              t_d = t_d.replace(/h0011/g, 'span class=\"tipue_search_content_bold\"');
                                              t_d = t_d.replace(/h0012/g, '/span');
                                              
-                                             out += '<div class="tipue_search_content_text">' + t_d + '</div>';
+                                             out += '<div class="tipue_search_content_text"><p>' + t_d + '</p></div><br>';
                                         }
                                         
                                         if (found[i].note)
                                         {
                                              out += '<div class="tipue_search_note">' + found[i].note + '</div>';    
-                                        }                                       
+                                        }
+
+                                        out += '<a class="btn" href="';
+                                        out += found[i].url;
+                                        out += '">Continue reading</a>';
                                         
+                                        out += '</div>';
+
+                                        if (i != found.length - 1) {
+                                            out += '<hr>';
+                                        }
+
                                         out += '</article>';
                                    }
                                    l_o++;     
