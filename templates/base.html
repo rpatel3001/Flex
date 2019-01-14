@@ -26,6 +26,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js" type="text/javascript"></script>
   {% else %}
     <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/stylesheet/style.min.css">
+    <link rel="stylesheet" href="{{ SITEURL }}/theme/tipuesearch/tipuesearch.css">
   {% endif %}
 
   <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/pygments/{{ PYGMENTS_STYLE|default('github') }}.min.css">
@@ -104,6 +105,13 @@
 
       {% if SITESUBTITLE %}<p>{{ SITESUBTITLE }}</p>{% endif %}
 
+      <form id="searchform" action="/blog/search.html" onsubmit="return (this.elements['q'].value.length > 0)">
+          <input id="searchbox" type="text" name="q" size="12" placeholder="Search">
+          <button id="searchbutton" type="submit">
+              <i class="fas fa-search"></i>
+          </button>
+      </form>
+
       {% if pages or LINKS %}
       <nav>
         <ul class="list">
@@ -171,7 +179,9 @@
       {% if FEED_ALL_RSS %}
       <a href="{{ FEED_DOMAIN }}/{{ FEED_ALL_RSS }}">{{ _('RSS') }}</a>
       {% endif %}
+
     </nav>
+
     {% endif %}
 
     {% block content %}
