@@ -6,10 +6,7 @@ function sortTable(sortColumn){
         for(var j = 0; j < rowData.length - (i + 1); j++){
 	    var val1 = rowData.item(j).getElementsByTagName('td').item(sortColumn).innerHTML;
 	    var val2 = rowData.item(j+1).getElementsByTagName('td').item(sortColumn).innerHTML;
-	    console.log(val1);
-	    console.log(val2);
-	    if(val1 < val2){
-                console.log("if");
+	    if(val1 > val2){
 		tableData.insertBefore(rowData.item(j+1),rowData.item(j));
             }
         }
