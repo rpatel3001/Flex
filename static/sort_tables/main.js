@@ -4,8 +4,8 @@ function sortTable(sortColumn){
     var rowData = tableData.getElementsByTagName('tr');            
     for(var i = 0; i < rowData.length - 1; i++){
         for(var j = 0; j < rowData.length - (i + 1); j++){
-	    var val1 = rowData.item(j).getElementsByTagName('td').item(sortColumn).innerHTML.toLowerCase().replace(/^a |the /, "");
-	    var val2 = rowData.item(j+1).getElementsByTagName('td').item(sortColumn).innerHTML.toLowerCase().replace(/^a |the /, "");
+	    var val1 = rowData.item(j).getElementsByTagName('td').item(sortColumn).innerHTML.toLowerCase().replace(/^the /, "");
+	    var val2 = rowData.item(j+1).getElementsByTagName('td').item(sortColumn).innerHTML.toLowerCase().replace(/^the /, "");
 	    if(val1 > val2){
 		tableData.insertBefore(rowData.item(j+1),rowData.item(j));
             }
