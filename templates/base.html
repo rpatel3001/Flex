@@ -26,6 +26,8 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js" type="text/javascript"></script>
   {% else %}
     <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/stylesheet/style.min.css">
+    <link rel="stylesheet" href="{{ SITEURL }}/theme/tipuesearch/tipuesearch.css">
+    <script src="{{ SITEURL }}/theme/sort_tables/main.js" type="text/javascript"></script>
   {% endif %}
 
   {# DARK THEME STYLES #}
@@ -247,7 +249,9 @@
       {% if FEED_ALL_RSS %}
       <a href="{{ FEED_DOMAIN }}/{{ FEED_ALL_RSS }}">{{ _('RSS') }}</a>
       {% endif %}
+
     </nav>
+
     {% endif %}
 
     {% block content %}
